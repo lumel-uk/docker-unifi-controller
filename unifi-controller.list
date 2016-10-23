@@ -1,0 +1,5 @@
+# unifi v5 controller repository
+deb http://www.ubnt.com/downloads/unifi/debian unifi5 ubiquiti
+
+# optional upstream repository for mongodb
+deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen
