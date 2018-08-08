@@ -1,16 +1,16 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 MAINTAINER Brian Johnson <brijohn@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y
+RUN apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y && apt-get install -q -y gpg
 
 #Install Unifi v5
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv C0A52C50
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv 0C49F3730359A14518585931BC711F9BA15703C6
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv 06E85760C0A52C50
 ADD unifi-controller.list /etc/apt/sources.list.d/unifi-controller.list
 RUN apt-get update -q -y &&  apt-get upgrade -y && apt-get dist-upgrade -y && \
-    apt-get install -q -y unifi mongodb-server
+    apt-get install -q -y unifi mongodb-org-server
 
 
 # Wipe out auto-generated data
