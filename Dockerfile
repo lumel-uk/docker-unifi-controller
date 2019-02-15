@@ -1,16 +1,19 @@
 FROM ubuntu:18.04
 MAINTAINER Brian Johnson <brijohn@gmail.com>
 
+ARG UNIFI_VERSION
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y && apt-get install -q -y gpg
+RUN \
+# Check for mandatory build arguments
+    : "${UNIFI_VERSION:?Build argument needs to be set and non-empty.}"
 
+COPY apt/ /etc/apt/
+ADD "https://dl.ubnt.com/unifi/${UNIFI_VERSION}/unifi_sysvinit_all.deb" /
 #Install Unifi v5
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv 0C49F3730359A14518585931BC711F9BA15703C6
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv 06E85760C0A52C50
-ADD unifi-controller.list /etc/apt/sources.list.d/unifi-controller.list
+RUN apt-get update -q -y &&  apt-get upgrade -y && apt-get dist-upgrade -y
 RUN apt-get update -q -y &&  apt-get upgrade -y && apt-get dist-upgrade -y && \
-    apt-get install -q -y unifi mongodb-org-server
+    apt-get install -q -y ./unifi_sysvinit_all.deb mongodb-org-server && rm unifi_sysvinit_all.deb
 
 
 # Wipe out auto-generated data

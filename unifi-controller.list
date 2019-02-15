@@ -1,5 +1,0 @@
-# unifi stable controller repository
-deb http://www.ubnt.com/downloads/unifi/debian stable ubiquiti
-
-# optional upstream repository for mongodb
-deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse
