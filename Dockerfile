@@ -11,7 +11,6 @@ RUN \
 COPY apt/ /etc/apt/
 ADD "https://dl.ubnt.com/unifi/${UNIFI_VERSION}/unifi_sysvinit_all.deb" /
 #Install Unifi v5
-RUN apt-get update -q -y &&  apt-get upgrade -y && apt-get dist-upgrade -y
 RUN apt-get update -q -y &&  apt-get upgrade -y && apt-get dist-upgrade -y && \
     apt-get install -q -y ./unifi_sysvinit_all.deb mongodb-org-server && rm unifi_sysvinit_all.deb
 
