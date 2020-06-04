@@ -4,10 +4,6 @@ MAINTAINER Henry Southgate
 ENV UNIFI_VERSION=5.12.72
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN \
-# Check for mandatory build arguments
-    : "${UNIFI_VERSION:?Build argument needs to be set and non-empty.}"
-
 COPY apt/ /etc/apt/
 ADD "https://dl.ubnt.com/unifi/${UNIFI_VERSION}/unifi_sysvinit_all.deb" /
 #Install Unifi v5

@@ -1,4 +1,7 @@
 # Unifi Controller Docker Container
+
+This is a fork of brijohn's unifi-controller which has been updated to the latest version.
+
 > Stable 5.x branch of [Unifi Controller](https://www.ubnt.com/download/unifi/)
 
 ## Image Installation
@@ -13,7 +16,7 @@ From Source:
 ```sh
 git clone https://github.com/HenryJS/docker-unifi-controller.git
 cd docker-unifi-controller
-docker build --build-arg UNIFI_VERSION=<Unifi Version> -t "unifi-controller:latest" --rm --no-cache .
+docker build -t "unifi-controller:latest" --rm .
 ```
 
 
