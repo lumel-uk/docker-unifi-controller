@@ -34,8 +34,8 @@ docker run -d -p 8080:8080 -p 8443:8443 -p 3478:3478/udp \
 ```
 
 
-## Author
-
-Brian Johnson - [Github](https://github.com/brijohn/) - brijohn@gmail.com
+## Authors
+- Henry Southgate - [Github](https://github.com/HenryJS/)
+- Brian Johnson - [Github](https://github.com/brijohn/) - brijohn@gmail.com
 
 Distributed under the GPL 3 license. See ``LICENSE`` for more information.
