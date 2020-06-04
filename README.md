@@ -6,14 +6,14 @@
 From Docker Hub:
 
 ```sh
-docker pull brijohn/unifi-controller
+docker pull lumel/unifi-controller
 ```
 From Source:
 
 ```sh
-git clone https://github.com/brijohn/docker-unifi-controller.git
+git clone https://github.com/HenryJS/docker-unifi-controller.git
 cd docker-unifi-controller
-docker build -t "unifi-controller:latest" --rm --no-cache .
+docker build --build-arg UNIFI_VERSION=<Unifi Version> -t "unifi-controller:latest" --rm --no-cache .
 ```
 
 
@@ -30,7 +30,7 @@ Next launch the container using the previously created volumes.
 ```sh
 docker run -d -p 8080:8080 -p 8443:8443 -p 3478:3478/udp \
 -p 10001:10001/udp -v unifi:/usr/lib/unifi/data \
---name unifi brijohn/unifi-controller
+--name unifi lumel/unifi-controller
 ```
 
 
