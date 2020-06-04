@@ -1,7 +1,8 @@
 FROM ubuntu:18.04
-MAINTAINER Brian Johnson <brijohn@gmail.com>
+MAINTAINER Henry Southgate
 
 ARG UNIFI_VERSION
+ENV UNIFI_VERSION=5.12.72
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN \
