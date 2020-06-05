@@ -3,6 +3,7 @@
 This is a fork of brijohn's unifi-controller which has been updated to the latest version.
 
 > Stable 5.x branch of [Unifi Controller](https://www.ubnt.com/download/unifi/)
+> This release: v5.12.72
 
 ## Image Installation
 
