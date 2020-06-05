@@ -1,15 +1,15 @@
 FROM ubuntu:18.04
 MAINTAINER Henry Southgate
 
-ENV UNIFI_VERSION=5.12.72
 ENV DEBIAN_FRONTEND noninteractive
 
 COPY apt/ /etc/apt/
-ADD "https://dl.ubnt.com/unifi/${UNIFI_VERSION}/unifi_sysvinit_all.deb" /
-#Install Unifi v5
-RUN apt-get update -q -y &&  apt-get upgrade -y && apt-get dist-upgrade -y && \
-    apt-get install -q -y ./unifi_sysvinit_all.deb mongodb-org-server && rm unifi_sysvinit_all.deb
 
+# Update OS and install Unifi v5
+RUN apt-get -y update -q && \
+    apt-get -y upgrade && \
+	apt-get -y dist-upgrade && \
+    apt-get -y install unifi 
 
 # Wipe out auto-generated data
 RUN rm -rf /usr/lib/unifi/data/*

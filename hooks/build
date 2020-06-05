@@ -3,6 +3,4 @@
 echo "[***] Build hook running"
 IFS=', ' read -r -a tags <<< "$DOCKER_TAG"
 
-#echo "docker build --build-arg UNIFI_VERSION=${tags[0]} -t $DOCKER_REPO:${DOCKER_TAG//,/ -t $DOCKER_REPO:} ."
-#docker build --build-arg UNIFI_VERSION=${tags[0]} -t $DOCKER_REPO:${DOCKER_TAG//,/ -t $DOCKER_REPO:} .
 docker build -t $DOCKER_REPO:${DOCKER_TAG//,/ -t $DOCKER_REPO:} .
