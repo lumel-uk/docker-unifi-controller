@@ -46,6 +46,16 @@ docker run -d -p 8080:8080 \
 			  lumel/unifi-controller
 ```
 
+## Update Policy
+
+The image is updated on the following policy:
+
+* Weekly, Sundays at 00:00 UK time: The `latest` image will be re-built.  This allows for any upstream updates to be deployed into the image.  Thinking OS, mongo, etc.  It will always use the latest version of UniFi.
+* On UniFi update: When I notice there's a new UniFi release, I'll push a new tag to the git repo; and this will create a new docker tag and update latest.
+* Ad-hoc: As and when I make changes, I'll push to dev.  It might work but there's unlikely to be anything ground-breaking and it might break.
+
+For stability: choose latest.  For a specific UniFi revision, choose the tag.
+
 ## Authors
 - Henry Southgate - [Github](https://github.com/HenryJS/)
 - Brian Johnson - [Github](https://github.com/brijohn/) - brijohn@gmail.com
