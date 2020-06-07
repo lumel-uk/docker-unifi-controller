@@ -3,13 +3,19 @@ MAINTAINER Henry Southgate
 
 ENV DEBIAN_FRONTEND noninteractive
 
+# Install mongodb and UniFi sources
 COPY apt/ /etc/apt/
 
-# Update OS and install Unifi v5
+# Install the UniFi GPG key
+# RUN apt-key adv --keyserver keyserver.ubuntu.com --recv 06E85760C0A52C50 
+
+# Update OS and install UniFi v5
 RUN apt-get -y update -q && \
-    apt-get -y upgrade && \
 	apt-get -y dist-upgrade && \
-    apt-get -y install unifi 
+    apt-get -y install unifi  && \
+	apt-get -y autoremove && \
+	apt-get -y autoclean 
+
 
 # Wipe out auto-generated data
 RUN rm -rf /usr/lib/unifi/data/*
