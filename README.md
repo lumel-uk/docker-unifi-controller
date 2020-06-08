@@ -2,6 +2,17 @@
 
 This is a fork of brijohn's unifi-controller.  It has been modified to draw UniFi from the vendor-provided apt source.
 
+## Update Policy
+
+The image is updated on the following policy:
+
+* Weekly, Sundays at 00:00: The `master` branch will be re-built and tagged `latest`.  This allows for upstream packages to be updated.  It will always use the latest version of UniFi.
+* On UniFi update: When I notice there's a new UniFi release, I'll push a new tag to the git repo; and this will create a new docker tag and update `latest`.
+* Ad-hoc: As and when I make changes, I'll push to dev.  It might work but it also might break.
+
+For stability, choose latest.  For a specific UniFi revision, choose the tag.  For random funbags, choose dev.
+
+
 ## Image Installation
 
 From Docker Hub:
@@ -41,20 +52,11 @@ docker run -d -p 8080:8080 \
               -p 8443:8443 \
 			  -p 3478:3478/udp \
 			  -p 10001:10001/udp
-			  -v /whereverunifi-controller:/usr/lib/unifi/data \
+			  -v /wherever/unifi-controller:/usr/lib/unifi/data \
 			  --name unifi \
 			  lumel/unifi-controller
 ```
 
-## Update Policy
-
-The image is updated on the following policy:
-
-* Weekly, Sundays at 00:00 UK time: The `latest` image will be re-built.  This allows for any upstream updates to be deployed into the image.  Thinking OS, mongo, etc.  It will always use the latest version of UniFi.
-* On UniFi update: When I notice there's a new UniFi release, I'll push a new tag to the git repo; and this will create a new docker tag and update latest.
-* Ad-hoc: As and when I make changes, I'll push to dev.  It might work but there's unlikely to be anything ground-breaking and it might break.
-
-For stability: choose latest.  For a specific UniFi revision, choose the tag.
 
 ## Authors
 - Henry Southgate - [Github](https://github.com/HenryJS/)
