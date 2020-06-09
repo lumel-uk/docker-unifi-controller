@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 MAINTAINER Henry Southgate
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -6,11 +6,9 @@ ENV DEBIAN_FRONTEND noninteractive
 # Install mongodb and UniFi sources
 COPY apt/ /etc/apt/
 
-# Install the UniFi GPG key
-# RUN apt-key adv --keyserver keyserver.ubuntu.com --recv 06E85760C0A52C50 
-
 # Update OS and install UniFi v5
 RUN apt-get -y update -q && \
+    apt-get 0y install ca-certificates apt-transport-https0 \
 	apt-get -y dist-upgrade && \
     apt-get -y install unifi  && \
 	apt-get -y autoremove && \
