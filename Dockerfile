@@ -9,6 +9,13 @@ COPY apt/ /etc/apt/
 # Install the UniFi GPG key
 # RUN apt-key adv --keyserver keyserver.ubuntu.com --recv 06E85760C0A52C50 
 
+# Install CA certs
+RUN apt-get -y update && \
+    apt-get -y install ca-certificates apt-transport-https
+
+# Install the UniFi sources
+RUN echo 'deb https://www.ui.com/downloads/unifi/debian stable ubiquiti' >>  /etc/apt/sources.list.d/100-ubnt-unifi.list
+
 # Update OS and install UniFi v5
 RUN apt-get -y update -q && \
 	apt-get -y dist-upgrade && \
