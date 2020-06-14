@@ -8,7 +8,7 @@ This is a fork of brijohn's unifi-controller.  It has been modified to draw UniF
 The image is updated on the following policy:
 
 * Weekly, Sundays at 00:00: The `master` branch will be re-built and tagged `latest`.  This allows for upstream packages to be updated.  It will always use the latest version of UniFi.
-* On UniFi update: When I notice there's a new UniFi release, I'll push a new tag to the git repo; and this will create a new docker tag and update `latest`.
+* On UniFi update: When the controller starts bugging me about an update, I'll start re-building daily. The repo can take a while to update so this will catch it when it does.  When the update has been pulled, I'll push a new tag to the git repo, which will build a new docker tag and update `latest` for good measure.
 * Ad-hoc: As and when I make changes, I'll push to dev.  It might work but it also might break.
 
 For stability, choose latest.  For a specific UniFi revision, choose the tag.  For random funbags, choose dev.
