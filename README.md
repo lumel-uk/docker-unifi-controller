@@ -8,7 +8,7 @@ This is a fork of brijohn's unifi-controller.  It has been modified to draw UniF
 The image is updated on the following policy:
 
 * Weekly, Sundays at 00:00: The `master` branch will be re-built and tagged `latest`.  This allows for upstream packages to be updated.  It will always use the latest version of UniFi.
-* On UniFi update: When the controller starts bugging me about an update, I'll start re-building daily. The repo can take a while to update so this will catch it when it does.  When the update has been pulled, I'll push a new tag to the git repo, which will build a new docker tag and update `latest` for good measure.
+* On UniFi update: When the controller starts bugging me about an update, I'll start re-building daily. The UniFi package is published to the repo exactly a week after it's published via the website (see [Notes on UniFi releases](https://community.ui.com/questions/Notes-on-UniFi-releases-Stable-Candidate-Stable-repos-download-site-etc-/5e49c960-58e4-4464-bf4d-49e3f6465399)) so this will catch it when it does.  When the update has been pulled, I'll push a new tag to the git repo, which will build a new docker tag and update `latest` for good measure.
 * Ad-hoc: As and when I make changes, I'll push to dev.  It might work but it also might break.
 
 For stability, choose latest.  For a specific UniFi revision, choose the tag.  For random funbags, choose dev.
@@ -58,6 +58,14 @@ docker run -d -p 8080:8080 \
 			  lumel/unifi-controller
 ```
 
+
+## Manual Updte
+
+If you'd like to update the package / distro manually, use hte following:
+
+```sh
+docker exec -it unifi-lumel sh -c 'apt update && apt dist-upgrade'
+```
 
 ## Authors
 - Henry Southgate - [Github](https://github.com/HenryJS/)
