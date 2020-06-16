@@ -17,15 +17,13 @@ RUN apt-get -y update && \
 RUN echo 'deb https://www.ui.com/downloads/unifi/debian stable ubiquiti' >>  /etc/apt/sources.list.d/100-ubnt-unifi.list
 
 # Update OS and install UniFi v5
+# Wipe out auto-generated data
 RUN apt-get -y update -q && \
 	apt-get -y dist-upgrade && \
     apt-get -y install unifi  && \
 	apt-get -y autoremove && \
-	apt-get -y autoclean 
-
-
-# Wipe out auto-generated data
-RUN rm -rf /usr/lib/unifi/data/*
+	apt-get -y autoclean && \
+	rm -rf /usr/lib/unifi/data/*
 
 EXPOSE 8443/tcp 8080/tcp 8843/tcp 8880/tcp 3478/udp 10001/udp
 
