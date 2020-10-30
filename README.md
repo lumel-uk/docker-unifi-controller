@@ -1,6 +1,6 @@
 # Unifi Controller Docker Container
 
-This is a fork of brijohn's unifi-controller.  It has been modified to draw UniFi from the vendor-provided apt source.
+This is Yet Another UniFi Controller.  It draws UniFi from the vendor-provided apt source and updates frequently.
 
 
 ## Update Policy
@@ -69,6 +69,5 @@ docker exec -it unifi sh -c 'apt update && apt dist-upgrade'
 
 ## Authors
 - Henry Southgate - [Github](https://github.com/HenryJS/)
-- Brian Johnson - [Github](https://github.com/brijohn/) - brijohn@gmail.com
 
 Distributed under the GPL 3 license. See ``LICENSE`` for more information.
