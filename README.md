@@ -11,7 +11,7 @@ The image is updated on the following policy:
 * On UniFi update: When the controller starts bugging me about an update, I'll start re-building daily. The UniFi package is published to the repo exactly a week after it's published via the website (see [Notes on UniFi releases](https://community.ui.com/questions/Notes-on-UniFi-releases-Stable-Candidate-Stable-repos-download-site-etc-/5e49c960-58e4-4464-bf4d-49e3f6465399)) so this will catch it when it does.  When the update has been pulled, I'll push a new tag to the git repo, which will build a new docker tag and update `latest` for good measure.
 * Ad-hoc: As and when I make changes, I'll push to `dev`.  It might work but it also might break.
 
-For stability, choose `latest`.  For a specific UniFi revision, choose the tag bbut beware the platform may need an update.  For random funbags, choose `dev`.
+For stability, choose `latest`.  For a specific UniFi revision, choose the tag but beware the platform may need an update.  Some of the builds are quite old.  For random funbags, choose `dev`.
 
 
 ## Image Installation
