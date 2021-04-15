@@ -59,13 +59,21 @@ docker run -d -p 8080:8080 \
 ```
 
 
-## Manual Updte
+## Manual Update
 
 If you'd like to update the package / distro manually, use the following:
 
 ```sh
 docker exec -it unifi sh -c 'apt update && apt dist-upgrade'
 ```
+
+## Troubleshooting
+
+**Q:** Adoption fails, reporting that my devices can't connect to the controller.
+
+**A:** The server runs in a container, so when it tries to adopt a device, it uses the container's IP - which on my system is in 172.16.0.0/12.   To fix, go to your Unifi Settings, hit Controller, then enter your Controller Hostname / IP and select *Override inform host with controller hostname/IP*.
+## Troubleshooting 
+
 
 ## Author
 - Henry Southgate - [Github](https://github.com/HenryJS/)
