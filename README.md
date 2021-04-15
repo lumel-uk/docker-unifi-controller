@@ -32,7 +32,8 @@ docker build -t "unifi-controller:latest" --rm .
 
 ## Running the Container
 
-Create a volume to store the unifi persistence data, then launch the container using the previously created volumes.
+Create a volume to store the unifi persistence data, then launch the 
+container using the previously created volumes.
 
 ```sh
 docker volume create --name unifi
@@ -45,7 +46,8 @@ docker run -d -p 8080:8080 \
 			  lumel/unifi-controller
 ```
 
-If, like me, you'd rather maintain state in a specific place in the local filesystem, do this instead:
+If, like me, you'd rather maintain state in a specific place in the local 
+filesystem, do this instead:
 
 ```sh
 mkdir -p /wherever/unifi-controller
@@ -69,10 +71,16 @@ docker exec -it unifi sh -c 'apt update && apt dist-upgrade'
 
 ## Troubleshooting
 
-**Q:** Adoption fails, reporting that my devices can't connect to the controller.
+**Q: Adoption fails, reporting that my devices can't connect to the controller.**
 
-**A:** The server runs in a container, so when it tries to adopt a device, it uses the container's IP - which on my system is in 172.16.0.0/12.   To fix, go to your Unifi Settings, hit Controller, then enter your Controller Hostname / IP and select *Override inform host with controller hostname/IP*.
-## Troubleshooting 
+**A:** When adopting a device, the controller needs to tell it where to talk 
+back to; i.e. where the controller is.  By default, this is autodetected; as 
+this controller runs in a container, the address it finds is the container's 
+private IP - which on my system is in 172.16.0.0/12.   
+
+To resolve, go to your Unifi Settings, hit Controller, then enter your 
+Controller Hostname / IP and select *Override inform host with controller 
+hostname/IP*.
 
 
 ## Author
