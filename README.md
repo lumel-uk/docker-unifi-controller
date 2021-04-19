@@ -24,7 +24,7 @@ docker pull lumel/unifi-controller
 From Source:
 
 ```sh
-git clone https://github.com/HenryJS/docker-unifi-controller.git
+git clone https://github.com/lumel-uk/docker-unifi-controller.git
 cd docker-unifi-controller
 docker build -t "unifi-controller:latest" --rm .
 ```
@@ -84,6 +84,6 @@ hostname/IP*.
 
 
 ## Author
-- Henry Southgate - [Github](https://github.com/HenryJS/)
+- Henry Southgate - [Github](https://github.com/lumel-uk/)
 
 Distributed under the GPL 3 license. See ``LICENSE`` for more information.
