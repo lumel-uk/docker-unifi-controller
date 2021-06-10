@@ -13,7 +13,7 @@ then
 fi
 
 
-if [ $TAG != latest -q $TAG != dev ]
+if [ $TAG != latest -a $TAG != dev ]
 then
 	git tag -a $1 -m $1
 	git push --tags
