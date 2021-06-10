@@ -15,10 +15,16 @@ fi
 
 if [ $TAG != latest -a $TAG != dev ]
 then
-	git tag -a $1 -m $1
-	git push --tags
+	OLD_BRANCH=$CURRENT_BRANCH
+	git checkout master
+	#git tag -a $1 -m $1
+	#git push --tags
 fi
 
 docker build -t lumel/unifi-controller:$TAG .
 docker push lumel/unifi-controller:$TAG
 
+if [ ! -z $OLD_BRANCH ]
+then
+	git checkout $OLD_BRANCH
+fi
