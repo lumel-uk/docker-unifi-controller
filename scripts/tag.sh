@@ -1,9 +1,10 @@
 #!/bin/bash
 
 TAG=$1
+CURRENT_BRANCH=$(git status | grep 'On branch' | cut -f3 -d\  ) 
+
 if [ -z $TAG ]
 then
-	CURRENT_BRANCH=$(git status | grep 'On branch' | cut -f3 -d\  ) 
 	if [ $CURRENT_BRANCH == "dev" ]
 	then
 		TAG="dev"
@@ -24,6 +25,7 @@ fi
 docker build -t lumel/unifi-controller:$TAG .
 docker push lumel/unifi-controller:$TAG
 
+echo Reverting to $OLD_BRANCH
 if [ ! -z $OLD_BRANCH ]
 then
 	git checkout $OLD_BRANCH
