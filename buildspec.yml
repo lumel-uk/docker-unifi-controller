@@ -1,0 +1,13 @@
+version: 0.2
+
+
+env:
+  shell: bash
+
+phases:
+  build:
+    on-failure: CONTINUE
+    commands:
+      - docker build -t lumel/unifi-controller:codepipeline .
+    finally:
+      - echo done
