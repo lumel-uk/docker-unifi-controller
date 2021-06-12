@@ -22,7 +22,7 @@ then
 	#git push --tags
 fi
 
-docker build -t lumel/unifi-controller:$TAG .
+docker build -t lumel/unifi-controller:$TAG --rm .
 docker push lumel/unifi-controller:$TAG
 
 echo Reverting to $OLD_BRANCH
