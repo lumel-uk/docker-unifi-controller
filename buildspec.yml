@@ -6,16 +6,14 @@ env:
 
 phases:
   pre-build:
-  commands:
-    - 'docker login -u lumel -p $PASSWORD'
+    commands:
+      - 'docker login -u lumel -p $PASSWORD'
 
   build:
-    on-failure: CONTINUE
     commands:
       - docker build -t lumel/unifi-controller:codepipeline .
-    finally:
-      - echo done
 
   post-build:
     commands:
 	  - docker push lumel/unifi-controller:codepipeline
+
