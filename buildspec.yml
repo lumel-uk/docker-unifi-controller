@@ -7,7 +7,7 @@ env:
 phases:
   pre-build:
   commands:
-    - docker login -u lumel -p $PASSWORD
+    - 'docker login -u lumel -p $PASSWORD'
 
   build:
     on-failure: CONTINUE
