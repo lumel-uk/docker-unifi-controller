@@ -13,7 +13,7 @@ phases:
 
   build:
     commands:
-      - docker build -t lumel/unifi-controller:$BRANCH
+      - docker build -t lumel/unifi-controller:$BRANCH .
 
   post_build:
     commands:
