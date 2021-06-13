@@ -12,6 +12,8 @@ phases:
       - if grep -q '/' <<< $CURRENT_BRANCH ; then export CURRENT_BRANCH=$(cut -f2 -d/  ) <<< $CURRENT_BRANCH; fi
       - echo Branch is $CURRENT_BRANCH
       - echo Source-Vn is $CODEBUILD_SOURCE_VERSION
+      - export
+      - false
 
   build:
     commands:
