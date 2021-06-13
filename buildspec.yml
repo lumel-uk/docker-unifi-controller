@@ -8,6 +8,8 @@ phases:
   pre_build:
     commands:
       - "docker login -u lumel -p $PASSWORD"
+      - echo Branch is $BRANCH
+      - "echo Branch is $BRANCH"
 
   build:
     commands:
