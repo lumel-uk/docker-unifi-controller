@@ -8,18 +8,12 @@ phases:
   pre_build:
     commands:
       - "docker login -u lumel -p $PASSWORD"
-      - export CURRENT_BRANCH=$CODEBUILD_SOURCE_VERSION
-      - if grep -q '/' <<< $CURRENT_BRANCH ; then export CURRENT_BRANCH=$(cut -f2 -d/  ) <<< $CURRENT_BRANCH; fi
-      - echo Branch is $CURRENT_BRANCH
-      - echo Source-Vn is $CODEBUILD_SOURCE_VERSION
-      - export
-      - false
 
   build:
     commands:
-      - docker build -t lumel/unifi-controller:$CURRENT_BRANCH .
+      - docker build -t lumel/unifi-controller:$BRANCH
 
   post_build:
     commands:
-      - docker push lumel/unifi-controller:$CURRENT_BRANCH
+      - docker push lumel/unifi-controller:$BRANCH
 
