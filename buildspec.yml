@@ -10,6 +10,7 @@ phases:
       - "docker login -u lumel -p $PASSWORD"
       - echo Branch is $BRANCH
       - "echo Branch is $BRANCH"
+      - git symbolic-ref HEAD --short 2>/dev/null
 
   build:
     commands:
