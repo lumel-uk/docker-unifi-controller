@@ -9,6 +9,7 @@ phases:
     commands:
       - "docker login -u lumel -p $PASSWORD"
       - export CURRENT_BRANCH=$(git symbolic-ref HEAD --short 2>/dev/null)
+      - git symbolic-ref HEAD --short 2>/dev/null
       - if grep -q '/' <<< $CURRENT_BRANCH ; then export CURRENT_BRANCH=$(cut -f2 -d/  ) <<< $CURRENT_BRANCH; fi
       - echo Branch is $CURRENT_BRANCH
 
