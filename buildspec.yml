@@ -11,7 +11,8 @@ phases:
       - echo Branch is $BRANCH
       - "echo Branch is $BRANCH"
       - ls -la
-      - git symbolic-ref HEAD --short 2>/dev/null
+      - BRANCH=$(git status | grep 'On branch' | cut -f3 -d\  )
+      - if grep -q '/' <<< $BRANCH; then export BRANCH=$( cut -f2 -d/  <<< $BRANCH); fi
 
   build:
     commands:
