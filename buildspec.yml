@@ -3,24 +3,15 @@ version: 0.2
 
 env:
   shell: bash
+  parameter-store:
+    DOCKER_USERNAME: uk.co.lumel.credentials.docker_username
+    DOCKER_PASSWORD: uk.co.lumel.credentials.docker_password 
 
 phases:
   pre_build:
     commands:
-      - "docker login -u lumel -p $PASSWORD"
+      - "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
       - echo Branch is $BRANCH
-      - "echo Branch is $BRANCH"
-      - ls -la
-      - ls -l .git/
-      - cat .git/HEAD
-      - BRANCH=$(cut -f2 -d\  < .git/HEAD); echo B=$BRANCH
-      - echo B=$BRANCH
-      - BRANCH=${BRANCH#refs/heads/}; echo B=$BRANCH
-      - if grep -q '/' <<< $BRANCH; then export BRANCH=$( cut -f2 -d/  <<< $BRANCH); fi
-      - echo $BRANCH
-      - git status
-      - export
-      - false
 
   build:
     commands:
