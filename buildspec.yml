@@ -14,6 +14,7 @@ phases:
       - BRANCH=$(git status | grep 'On branch' | cut -f3 -d\  ); echo B=$BRANCH
       - if grep -q '/' <<< $BRANCH; then export BRANCH=$( cut -f2 -d/  <<< $BRANCH); fi
       - echo $BRANCH
+      - git status
 
   build:
     commands:
