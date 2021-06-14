@@ -11,8 +11,9 @@ phases:
       - echo Branch is $BRANCH
       - "echo Branch is $BRANCH"
       - ls -la
-      - BRANCH=$(git status | grep 'On branch' | cut -f3 -d\  )
+      - BRANCH=$(git status | grep 'On branch' | cut -f3 -d\  ); echo B=$BRANCH
       - if grep -q '/' <<< $BRANCH; then export BRANCH=$( cut -f2 -d/  <<< $BRANCH); fi
+      - echo $BRANCH
 
   build:
     commands:
