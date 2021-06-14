@@ -12,6 +12,7 @@ phases:
     commands:
       - "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
       - echo Branch is $BRANCH
+      - export
 
   build:
     commands:
