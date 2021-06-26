@@ -11,14 +11,14 @@ phases:
   pre_build:
     commands:
       - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-      - echo Branch is $BRANCH
+      - echo Branch is $DOCKER_TAG
 
   build:
     commands:
-      - docker build -t $DOCKER_USERNAME/unifi-controller:$BRANCH .
+      - docker build -t $DOCKER_USERNAME/unifi-controller:$DOCKER_TAG .
 
   post_build:
     commands:
-      - docker push $DOCKER_USERNAME/unifi-controller:$BRANCH
+      - docker push $DOCKER_USERNAME/unifi-controller:$DOCKER_TAG
 
 
