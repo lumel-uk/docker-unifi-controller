@@ -37,13 +37,15 @@ container using the previously created volumes.
 
 ```sh
 docker volume create --name unifi
-docker run -d -p 8080:8080 \
-              -p 8443:8443 \
-			  -p 3478:3478/udp \
-			  -p 10001:10001/udp \
-			  -v unifi:/usr/lib/unifi/data \
-			  --name unifi \
-			  lumel/unifi-controller
+docker run -d \
+           --net=host \ 
+           -p 8080:8080 \
+           -p 8443:8443 \
+           -p 3478:3478/udp \
+           -p 10001:10001/udp \
+           -v unifi:/usr/lib/unifi/data \
+           --name lumel-unifi \
+           lumel/unifi-controller
 ```
 
 If, like me, you'd rather maintain state in a specific place in the local 
@@ -52,13 +54,15 @@ filesystem, do this instead:
 ```sh
 DATA_PATH=/wherever/unifi-controller
 mkdir -p $DATA_PATH
-docker run -d -p 8080:8080 \
-              -p 8443:8443 \
-			  -p 3478:3478/udp \
-			  -p 10001:10001/udp \
-			  -v ${DATA_PATH}:/usr/lib/unifi/data \
-			  --name unifi \
-			  lumel/unifi-controller
+docker run -d \
+           --net=host \ 
+           -p 8080:8080 \
+           -p 8443:8443 \
+           -p 3478:3478/udp \
+           -p 10001:10001/udp \
+           -v ${DATA_PATH}:/usr/lib/unifi/data \
+           --name lumel-unifi \
+           lumel/unifi-controller
 ```
 
 
@@ -88,6 +92,9 @@ private IP - which on my system is in 172.16.0.0/12.
 To resolve, go to your Unifi Settings, hit Controller, then enter your 
 Controller Hostname / IP and select *Override inform host with controller 
 hostname/IP*.
+
+Note that by using '--net=host' above, this _ought_ to be fixed, as the controller
+will bind directly to the host's interface.
 
 
 ## Author
