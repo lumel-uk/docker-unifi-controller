@@ -23,7 +23,9 @@ RUN apt-get -y update -q && \
     apt-get -y install unifi  && \
 	apt-get -y autoremove && \
 	apt-get -y autoclean && \
-	rm -rf /usr/lib/unifi/data/*
+	rm -rf /var/lib/apt/lists/*	/usr/lib/unifi/data/*
+
+RUN dpkg -s unifi | grep -i version | tee /unifi-version
 
 EXPOSE 8443/tcp 8080/tcp 8843/tcp 8880/tcp 3478/udp 10001/udp
 
