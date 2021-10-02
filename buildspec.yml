@@ -20,5 +20,6 @@ phases:
   post_build:
     commands:
       - docker push $DOCKER_USERNAME/unifi-controller:$DOCKER_TAG
+	  - scripts/tag_dev_latest_version.sh $DOCKER_USERNAME/unifi-controller $DOCKER_TAG
 
 
