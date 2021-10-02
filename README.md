@@ -7,11 +7,10 @@ This is Yet Another UniFi Controller.  It draws UniFi from the vendor-provided a
 
 The image is updated on the following policy:
 
-* Weekly, Sundays at 00:00: The `master` branch will be re-built and tagged `latest`.  This allows for upstream packages to be updated.  It will always use the latest version of UniFi.
-* On UniFi update: When I notice the package has updated, I'll rebuild `master` and push to docker hub, tagged with the UniFi version.  I'll also update `latest` for good measure.
+* Weekly, Sundays at 00:00: The `master` branch will be re-built and tagged with both `latest` and the relevant UniFi revision.  This allows for upstream packages to be updated.  It will always use the latest version of UniFi.
 * Ad-hoc: As and when I make changes, I'll push to `dev`.  It'll probably work but it also might break.
 
-For stability, choose `latest`.  For a specific UniFi revision, choose the tag but beware the platform will be as per the UniFi release and is highly likely to need an update.  Some of the builds are quite old.  For whatever I'm poking, choose `dev`.
+For stability, choose `latest`.  For a specific UniFi revision, choose the tag, but beware the platform will be out of date and will need an update.  Some of the builds are quite old.  For whatever I'm poking, choose `dev`.
 
 
 ## Image Installation
