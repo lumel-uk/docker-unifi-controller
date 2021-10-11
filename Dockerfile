@@ -11,7 +11,8 @@ COPY apt/ /etc/apt/
 
 # Install CA certs
 RUN apt-get -y update && \
-    apt-get -y install ca-certificates apt-transport-https
+    apt-get -y install ca-certificates apt-transport-https && \
+	rm -rf /var/lib/apt/lists/*	/usr/lib/unifi/data/*
 
 # Install the UniFi sources
 RUN echo 'deb https://www.ui.com/downloads/unifi/debian stable ubiquiti' >>  /etc/apt/sources.list.d/100-ubnt-unifi.list
@@ -19,8 +20,8 @@ RUN echo 'deb https://www.ui.com/downloads/unifi/debian stable ubiquiti' >>  /et
 # Update OS and install UniFi v5
 # Wipe out auto-generated data
 RUN apt-get -y update -q && \
-	apt-get -y dist-upgrade && \
-    apt-get -y install unifi  && \
+	apt-get -y full-upgrade && \
+    apt-get -y install openjdk-8-jre unifi  && \
 	apt-get -y autoremove && \
 	apt-get -y autoclean && \
 	rm -rf /var/lib/apt/lists/*	/usr/lib/unifi/data/*
