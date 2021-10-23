@@ -34,7 +34,7 @@ echo Retagging as $NEW_TAG
 docker  tag $IMAGE:$TAG $IMAGE:$NEW_TAG
 
 echo Pushing image
-docker push lumel/unifi-controller:$NEW_TAG
+docker push --all-tags lumel/unifi-controller:$NEW_TAG
 
 docker rm $id
 
