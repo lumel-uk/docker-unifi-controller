@@ -14,7 +14,7 @@ fi
 DOCKER_PASSWORD=$(aws ecr get-login-password --region eu-west-2)
 
 docker login --username AWS --password $DOCKER_PASSWORD 368255555983.dkr.ecr.eu-west-2.amazonaws.com
-docker tag $IMAGE:$TAG 368255555983.dkr.ecr.eu-west-2.amazonaws.com/unifi-controller:latest
-docker push 368255555983.dkr.ecr.eu-west-2.amazonaws.com/unifi-controller:$DOCKER_TAG
+docker tag $IMAGE:$TAG 368255555983.dkr.ecr.eu-west-2.amazonaws.com/unifi-controller:$TAG
+docker push 368255555983.dkr.ecr.eu-west-2.amazonaws.com/unifi-controller:$TAG
 
 
