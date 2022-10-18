@@ -6,11 +6,12 @@ ENV DEBIAN_FRONTEND noninteractive
 # Install mongodb and UniFi sources
 COPY apt/ /etc/apt/
 
-# Install the UniFi GPG key
-# RUN apt-key adv --keyserver keyserver.ubuntu.com --recv 06E85760C0A52C50 
+RUN who am i
+RUN ls -l /etc/apt/
 
 # Install CA certs
-RUN apt-get -y update && \
+RUN chmod a+r /etc/apt/trusted.gpg && \
+    apt-get -y update && \
     apt-get -y install ca-certificates apt-transport-https && \
 	rm -rf /var/lib/apt/lists/*	/usr/lib/unifi/data/*
 
