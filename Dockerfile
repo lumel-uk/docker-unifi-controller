@@ -1,5 +1,5 @@
 FROM ubuntu:18.04
-MAINTAINER Henry Southgate
+MAINTAINER Henry Southgate.
 
 ENV DEBIAN_FRONTEND noninteractive
 
