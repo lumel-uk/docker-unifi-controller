@@ -21,5 +21,6 @@ phases:
     commands:
       - docker push --all-tags $DOCKER_USERNAME/unifi-controller
       - scripts/tag_dev_latest_version.sh $DOCKER_USERNAME/unifi-controller $DOCKER_TAG
+	  - scripts/store_in_ecr.sh $DOCKER_USERNAME/unifi-controller $DOCKER_TAG
 
 
