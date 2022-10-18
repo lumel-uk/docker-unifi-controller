@@ -1,13 +1,10 @@
 FROM ubuntu:20.04
-MAINTAINER Henry Southgate.
+MAINTAINER Henry Southgate
 
 ENV DEBIAN_FRONTEND noninteractive
 
 # Install mongodb and UniFi sources
 COPY apt/ /etc/apt/
-
-RUN who am i
-RUN ls -l /etc/apt/
 
 # Install CA certs
 RUN chmod a+r /etc/apt/trusted.gpg && \
