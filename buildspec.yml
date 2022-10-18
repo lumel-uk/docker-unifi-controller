@@ -1,0 +1,25 @@
+version: 0.2
+
+
+env:
+  shell: bash
+  parameter-store:
+    DOCKER_USERNAME: uk.co.lumel.credentials.docker_username
+    DOCKER_PASSWORD: uk.co.lumel.credentials.docker_password 
+
+phases:
+  pre_build:
+    commands:
+      - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      - echo Branch is $DOCKER_TAG
+
+  build:
+    commands:
+      - docker build -t $DOCKER_USERNAME/unifi-controller:$DOCKER_TAG .
+
+  post_build:
+    commands:
+      - docker push --all-tags $DOCKER_USERNAME/unifi-controller
+      - scripts/tag_dev_latest_version.sh $DOCKER_USERNAME/unifi-controller $DOCKER_TAG
+
+

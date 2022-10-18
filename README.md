@@ -1,16 +1,16 @@
 # Unifi Controller Docker Container
 
-This is a fork of brijohn's unifi-controller.  It has been modified to draw UniFi from the vendor-provided apt source.
+This is Yet Another UniFi Controller.  It draws UniFi from the vendor-provided apt source and updates frequently.
 
-## Update Policy
+
+## Update Policy
 
 The image is updated on the following policy:
 
-* Weekly, Sundays at 00:00: The `master` branch will be re-built and tagged `latest`.  This allows for upstream packages to be updated.  It will always use the latest version of UniFi.
-* On UniFi update: When I notice there's a new UniFi release, I'll push a new tag to the git repo; and this will create a new docker tag and update `latest`.
-* Ad-hoc: As and when I make changes, I'll push to dev.  It might work but it also might break.
+* Weekly, Sundays at 00:00: The `master` branch will be re-built and tagged with both `latest` and the relevant UniFi revision.  This allows for upstream packages to be updated.  It will always use the latest version of UniFi.
+* Ad-hoc: As and when I make changes, I'll push to `dev`.  It'll probably work but it also might break.
 
-For stability, choose latest.  For a specific UniFi revision, choose the tag.  For random funbags, choose dev.
+For stability, choose `latest`.  For a specific UniFi revision, choose the tag, but beware the platform will be out of date and will need an update.  Some of the builds are quite old.  For whatever I'm poking, choose `dev`.
 
 
 ## Image Installation
@@ -31,35 +31,73 @@ docker build -t "unifi-controller:latest" --rm .
 
 ## Running the Container
 
-Create a volume to store the unifi persistence data, then next launch the container using the previously created volumes.
+Create a volume to store the UniFi persistence data, then launch the 
+container using the previously created volumes.
 
 ```sh
 docker volume create --name unifi
-docker run -d -p 8080:8080 \
-              -p 8443:8443 \
-			  -p 3478:3478/udp \
-			  -p 10001:10001/udp
-			  -v unifi:/usr/lib/unifi/data \
-			  --name unifi \
-			  lumel/unifi-controller
+docker run -d \
+           --net=host \ 
+           -p 8080:8080 \
+           -p 8443:8443 \
+           -p 3478:3478/udp \
+           -p 10001:10001/udp \
+           -v unifi:/usr/lib/unifi/data \
+           --name lumel-unifi \
+           lumel/unifi-controller
 ```
 
-If you'd rather maintain state in a specific place in the local filesystem, do this instead:
+If, like me, you'd rather maintain state in a specific place in the local 
+filesystem, do this instead:
 
 ```sh
-mkdir -p /wherever/unifi-controller
-docker run -d -p 8080:8080 \
-              -p 8443:8443 \
-			  -p 3478:3478/udp \
-			  -p 10001:10001/udp
-			  -v /wherever/unifi-controller:/usr/lib/unifi/data \
-			  --name unifi \
-			  lumel/unifi-controller
+DATA_PATH=/wherever/unifi-controller
+mkdir -p $DATA_PATH
+docker run -d \
+           --net=host \ 
+           -p 8080:8080 \
+           -p 8443:8443 \
+           -p 3478:3478/udp \
+           -p 10001:10001/udp \
+           -v ${DATA_PATH}:/usr/lib/unifi/data \
+           --name lumel-unifi \
+           lumel/unifi-controller
 ```
 
 
-## Authors
-- Henry Southgate - [Github](https://github.com/HenryJS/)
-- Brian Johnson - [Github](https://github.com/brijohn/) - brijohn@gmail.com
+## Manual Update
+
+If you'd like to update the package / distro manually, use the following:
+
+```sh
+docker exec -it unifi sh -c 'apt update && apt dist-upgrade'
+```
+
+Note this will also update the UniFi controller, so if you're pinning that for stability reasons, you'll have to hold the package first:
+
+```sh
+docker exec -it unifi sh -c 'apt-mark hold unifi && apt update && apt dist-upgrade'
+```
+
+## Troubleshooting
+
+**Q: Adoption fails, reporting that my devices can't connect to the controller.**
+
+**A:** When adopting a device, the controller needs to tell it where to talk 
+back to; i.e. where the controller is.  By default, this is autodetected; as 
+this controller runs in a container, the address it finds is the container's 
+private IP - which on my system is in 172.16.0.0/12.   
+
+To resolve, go to your Unifi Settings, hit Controller, then enter your 
+Controller Hostname / IP and select *Override inform host with controller 
+hostname/IP*.
+
+Note that by using '--net=host' above, this _ought_ to be fixed, as the controller
+will bind directly to the host's interface.
+
+
+## Author
+- Henry Southgate - [Github](https://github.com/lumel-uk/)
 
 Distributed under the GPL 3 license. See ``LICENSE`` for more information.
+
