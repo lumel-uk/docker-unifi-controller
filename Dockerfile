@@ -1,5 +1,5 @@
 FROM ubuntu:20.04
-MAINTAINER Henry Southgate
+LABEL author="Henry Southgate"
 
 ENV DEBIAN_FRONTEND noninteractive
 
