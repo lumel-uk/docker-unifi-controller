@@ -10,8 +10,8 @@ env:
 phases:
   pre_build:
     commands:
-      - dnf install -y docker aws-cli
-      - dockerd &
+      - #dnf install -y docker aws-cli
+      - #dockerd &
       - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
       - echo Branch is $DOCKER_TAG
 
