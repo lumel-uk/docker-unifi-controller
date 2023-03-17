@@ -25,8 +25,7 @@ else
 fi
 
 id=$(docker create $IMAGE:$TAG)
-vnstr=$(docker cp $id:/unifi-version -)
-unifi_version=$(cut -f2 -d: <<< $vnstr | cut -f1 -d- | xargs)
+unifi_version=$(docker cp $id:/unifi-version - | cut -f2 -d: | cut -f1 -d- )
 echo Detected Unifi Version $unifi_version
 
 NEW_TAG=$TAG_PREFIX$unifi_version
