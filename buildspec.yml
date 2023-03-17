@@ -11,6 +11,7 @@ phases:
   pre_build:
     commands:
       - dnf install -y docker
+      - dockerd &
       - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
       - echo Branch is $DOCKER_TAG
 
