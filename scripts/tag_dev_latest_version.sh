@@ -13,12 +13,10 @@ fi
 if [ $TAG == latest ]
 then
 	TAG_PREFIX=""
-elif [ $TAG == "dev" ]
-then
-	TAG_PREFIX="dev-"
-#elif [ $TAG == "nocache" ]
-#then
-#	TAG_PREFIX="nocache-"
+# Deliberately not double-tagging dev.
+# elif [ $TAG == "dev" ]
+# then
+# 	TAG_PREFIX="dev-"
 else
 	echo "Unsupported tag _${TAG}_" 1>&2
 	exit 0
