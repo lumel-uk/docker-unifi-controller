@@ -13,14 +13,14 @@ fi
 if [ $TAG == latest ]
 then
 	TAG_PREFIX=""
-# elif [ $TAG == "dev" ]
-#then
-#	TAG_PREFIX="dev-"
+elif [ $TAG == "dev" ]
+then
+	TAG_PREFIX="dev-"
 #elif [ $TAG == "nocache" ]
 #then
 #	TAG_PREFIX="nocache-"
 else
-	echo "Unsupported tag $TAG" 1>&2
+	echo "Unsupported tag _${TAG}_" 1>&2
 	exit 0
 fi
 
@@ -32,9 +32,6 @@ echo Detected Unifi Version $unifi_version
 NEW_TAG=$TAG_PREFIX$unifi_version
 echo Retagging as $NEW_TAG
 docker  tag $IMAGE:$TAG $IMAGE:$NEW_TAG
-
-echo Pushing image
-docker push --all-tags lumel/unifi-controller
 
 docker rm $id
 
