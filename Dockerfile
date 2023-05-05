@@ -3,8 +3,9 @@ LABEL author="Henry Southgate"
 
 ENV DEBIAN_FRONTEND noninteractive
 
-# Install mongodb and UniFi sources
+# Install MongoDB sources and trusted keyring
 COPY apt/ /etc/apt/
+
 
 # Install CA certs
 RUN chmod a+r /etc/apt/trusted.gpg && \
@@ -12,10 +13,11 @@ RUN chmod a+r /etc/apt/trusted.gpg && \
     apt-get -y install ca-certificates apt-transport-https && \
 	rm -rf /var/lib/apt/lists/*	/usr/lib/unifi/data/*
 
+
 # Install the UniFi sources
 RUN echo 'deb https://www.ui.com/downloads/unifi/debian stable ubiquiti' >>  /etc/apt/sources.list.d/100-ubnt-unifi.list
 
-# Update OS and install UniFi v5
+# Update OS and install UniFi 
 # Wipe out auto-generated data
 RUN apt-get -y update -q && \
 	apt-get -y full-upgrade && \
