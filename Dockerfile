@@ -3,21 +3,24 @@ LABEL author="Henry Southgate"
 
 ENV DEBIAN_FRONTEND noninteractive
 
-# Install mongodb and UniFi sources
-COPY apt/ /etc/apt/
+# Install core dependencies
+RUN apt-get -y update && \
+    apt-get -y install curl ca-certificates apt-transport-https && \
+    rm -rf /var/lib/apt/lists/*	/usr/lib/unifi/data/*
 
-# Install CA certs
-RUN chmod a+r /etc/apt/trusted.gpg && \
-    apt-get -y update && \
-    apt-get -y install ca-certificates apt-transport-https && \
-	rm -rf /var/lib/apt/lists/*	/usr/lib/unifi/data/*
+# Install apt signing keys
+RUN curl -o /etc/apt/trusted.gpg.d/unifi-repo.gpg https://dl.ui.com/unifi/unifi-repo.gpg && \
+    curl -o /etc/apt/trusted.gpg.d/monogdb-4.2.gpg https://pgp.mongodb.com/server-4.2.pub
 
-# Install the UniFi sources
-RUN echo 'deb https://www.ui.com/downloads/unifi/debian stable ubiquiti' >>  /etc/apt/sources.list.d/100-ubnt-unifi.list
+# Install the MongoDB and UniFi sources
+RUN echo 'deb [ arch=amd64 ] http://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse' >> /etc/apt/sources.list.d/099-monogdb.list && \
+    echo 'deb https://www.ui.com/downloads/unifi/debian stable ubiquiti' >>  /etc/apt/sources.list.d/100-ubnt-unifi.list
 
-# Update OS and install UniFi v5
+# Update OS and install UniFi:
 # Wipe out auto-generated data
-RUN apt-get -y update -q && \
+RUN \
+    apt-get -y update -q && \
+	apt-mark hold openjdk-1* && \
 	apt-get -y full-upgrade && \
     apt-get -y install openjdk-8-jre unifi  && \
 	apt-get -y autoremove && \
