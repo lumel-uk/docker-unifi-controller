@@ -54,11 +54,7 @@ filesystem, do this instead:
 DATA_PATH=/wherever/unifi-controller
 mkdir -p $DATA_PATH
 docker run -d \
-           --net=host \ 
-           -p 8080:8080 \
-           -p 8443:8443 \
-           -p 3478:3478/udp \
-           -p 10001:10001/udp \
+           --net=host \
            -v ${DATA_PATH}:/usr/lib/unifi/data \
            --name lumel-unifi \
            lumel/unifi-controller

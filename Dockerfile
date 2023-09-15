@@ -22,6 +22,7 @@ RUN echo 'deb [ arch=amd64 ] http://repo.mongodb.org/apt/ubuntu bionic/mongodb-o
 # Wipe out auto-generated data
 RUN \
     apt-get -y update -q && \
+	apt-mark hold openjdk-11-* && \
     apt-get -y full-upgrade && \
     apt-get -y install unifi  && \
     apt-get -y autoremove && \
