@@ -36,6 +36,6 @@ VOLUME /usr/lib/unifi/data
 
 WORKDIR /usr/lib/unifi
 
-ENTRYPOINT ["java", "-Xmx256M", "-jar", "/usr/lib/unifi/lib/ace.jar"]
+ENTRYPOINT ["java", "-Xmx512M", "-jar", "/usr/lib/unifi/lib/ace.jar"]
 CMD ["start"]
 
