@@ -38,10 +38,6 @@ container using the previously created volumes.
 docker volume create --name unifi
 docker run -d \
            --net=host \ 
-           -p 8080:8080 \
-           -p 8443:8443 \
-           -p 3478:3478/udp \
-           -p 10001:10001/udp \
            -v unifi:/usr/lib/unifi/data \
            --name lumel-unifi \
            lumel/unifi-controller

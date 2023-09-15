@@ -3,8 +3,6 @@ LABEL author="Henry Southgate"
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN cat /etc/issue
-
 # Install core dependencies
 RUN apt-get -y update && \
     apt-get -y install curl ca-certificates apt-transport-https && \
@@ -14,7 +12,7 @@ RUN apt-get -y update && \
 RUN curl -o /etc/apt/trusted.gpg.d/unifi-repo.gpg https://dl.ui.com/unifi/unifi-repo.gpg && \
     curl -o /etc/apt/trusted.gpg.d/monogdb-4.2.gpg https://pgp.mongodb.com/server-4.2.pub
 
-# Install the MongoDB and UniFi sources
+# Install additional sources
 RUN echo 'deb [ arch=amd64 ] http://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse' >> /etc/apt/sources.list.d/099-monogdb.list && \
     echo 'deb https://www.ui.com/downloads/unifi/debian stable ubiquiti' >>  /etc/apt/sources.list.d/100-ubnt-unifi.list
 
@@ -22,7 +20,7 @@ RUN echo 'deb [ arch=amd64 ] http://repo.mongodb.org/apt/ubuntu bionic/mongodb-o
 # Wipe out auto-generated data
 RUN \
     apt-get -y update -q && \
-	apt-mark hold openjdk-11-* && \
+    apt-mark hold openjdk-11-* && \
     apt-get -y full-upgrade && \
     apt-get -y install unifi  && \
     apt-get -y autoremove && \
@@ -30,8 +28,6 @@ RUN \
     rm -rf /var/lib/apt/lists/*	/usr/lib/unifi/data/*
 
 RUN dpkg -s unifi | grep -i version | tee /unifi-version
-
-EXPOSE 8443/tcp 8080/tcp 8843/tcp 8880/tcp 3478/udp 10001/udp
 
 VOLUME /usr/lib/unifi/data
 
