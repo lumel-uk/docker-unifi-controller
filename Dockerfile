@@ -3,6 +3,8 @@ LABEL author="Henry Southgate"
 
 ENV DEBIAN_FRONTEND noninteractive
 
+RUN cat /etc/issue
+
 # Install core dependencies
 RUN apt-get -y update && \
     apt-get -y install curl ca-certificates apt-transport-https && \
@@ -20,12 +22,12 @@ RUN echo 'deb [ arch=amd64 ] http://repo.mongodb.org/apt/ubuntu bionic/mongodb-o
 # Wipe out auto-generated data
 RUN \
     apt-get -y update -q && \
-	apt-mark hold openjdk-1* && \
-	apt-get -y full-upgrade && \
+    apt-mark hold openjdk-1* && \
+    apt-get -y full-upgrade && \
     apt-get -y install openjdk-8-jre unifi  && \
-	apt-get -y autoremove && \
-	apt-get -y autoclean && \
-	rm -rf /var/lib/apt/lists/*	/usr/lib/unifi/data/*
+    apt-get -y autoremove && \
+    apt-get -y autoclean && \
+    rm -rf /var/lib/apt/lists/*	/usr/lib/unifi/data/*
 
 RUN dpkg -s unifi | grep -i version | tee /unifi-version
 
