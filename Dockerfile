@@ -3,6 +3,7 @@ LABEL author="Henry Southgate"
 
 ENV DEBIAN_FRONTEND noninteractive
 
+<<<<<<< HEAD
 # Install core dependencies
 RUN apt-get -y update && \
     apt-get -y install curl ca-certificates apt-transport-https && \
@@ -17,6 +18,23 @@ RUN echo 'deb [ arch=amd64 ] http://repo.mongodb.org/apt/ubuntu bionic/mongodb-o
     echo 'deb https://www.ui.com/downloads/unifi/debian stable ubiquiti' >>  /etc/apt/sources.list.d/100-ubnt-unifi.list
 
 # Update OS and install UniFi:
+=======
+# Install MongoDB sources and trusted keyring
+COPY apt/ /etc/apt/
+
+
+# Install CA certs
+RUN chmod a+r /etc/apt/trusted.gpg && \
+    apt-get -y update && \
+    apt-get -y install ca-certificates apt-transport-https && \
+	rm -rf /var/lib/apt/lists/*	/usr/lib/unifi/data/*
+
+
+# Install the UniFi sources
+RUN echo 'deb https://www.ui.com/downloads/unifi/debian stable ubiquiti' >>  /etc/apt/sources.list.d/100-ubnt-unifi.list
+
+# Update OS and install UniFi 
+>>>>>>> abd5fef65317537056d103c03540f27f079c3805
 # Wipe out auto-generated data
 RUN \
     apt-get -y update -q && \
