@@ -14,13 +14,12 @@ then
 fi
 
 
-if [ $TAG == latest ]
+if [ $TAG == dev ]
 then
-	TAG_PREFIX=""
-else
-	echo "Unsupported tag _${TAG}_" 1>&2
+	echo "Not double-tagging Dev _${TAG}_" 1>&2
 	exit 0
 fi
+TAG_PREFIX=""
 
 id=$(docker create $IMAGE:$TAG)
 unifi_version=$(docker cp $id:/unifi-version - | cut -f2 -d: | cut -f1 -d- | xargs echo)
