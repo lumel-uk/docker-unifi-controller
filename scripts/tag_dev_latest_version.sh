@@ -13,6 +13,8 @@ fi
 if [ $TAG == latest ]
 then
 	TAG_PREFIX=""
+	echo "Don't tag latest while it's FUBAR"
+	exit 0
 # Deliberately not double-tagging dev.
 # elif [ $TAG == "dev" ]
 # then
