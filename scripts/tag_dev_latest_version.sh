@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#
+# Script takes the tag specified on the command line and re-tags
+# it using the UniFi package version
+#
 IMAGE=$1
 TAG=$2
 
@@ -13,12 +17,6 @@ fi
 if [ $TAG == latest ]
 then
 	TAG_PREFIX=""
-	echo "Don't tag latest while it's FUBAR"
-	exit 0
-# Deliberately not double-tagging dev.
-# elif [ $TAG == "dev" ]
-# then
-# 	TAG_PREFIX="dev-"
 else
 	echo "Unsupported tag _${TAG}_" 1>&2
 	exit 0
