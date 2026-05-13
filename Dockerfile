@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:24.04
 LABEL author="Henry Southgate"
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -13,16 +13,17 @@ RUN curl -o /etc/apt/trusted.gpg.d/unifi-repo.gpg https://dl.ui.com/unifi/unifi-
     curl -o /etc/apt/trusted.gpg.d/monogdb-4.2.gpg https://pgp.mongodb.com/server-4.2.pub
 
 # Install additional sources
-RUN echo 'deb [ arch=amd64 ] http://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse' >> /etc/apt/sources.list.d/099-monogdb.list && \
-    echo 'deb https://www.ui.com/downloads/unifi/debian stable ubiquiti' >>  /etc/apt/sources.list.d/100-ubnt-unifi.list
+RUN curl http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb -o libssl.deb && apt install ./libssl.deb && rm ./libssl.deb
+RUN echo 'deb [ arch=amd64 trusted=yes ] http://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse' >> /etc/apt/sources.list.d/099-monogdb.list
+# RUN echo "deb [trusted=yes] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/3.6 multiverse" >> /etc/apt/sources.list.d/mongodb-org-3.6.list
+RUN echo 'deb https://www.ui.com/downloads/unifi/debian stable ubiquiti' >>  /etc/apt/sources.list.d/100-ubnt-unifi.list
 
 # Update OS and install UniFi:
 # Wipe out auto-generated data
 RUN \
     apt-get -y update -q && \
-    apt-mark hold openjdk-11-* && \
-    apt-get -y full-upgrade && \
-    apt-get -y install unifi  && \
+    apt-get -y full-upgrade 
+RUN apt-get -y install unifi  && \
     apt-get -y autoremove && \
     apt-get -y autoclean && \
     rm -rf /var/lib/apt/lists/*	/usr/lib/unifi/data/*
