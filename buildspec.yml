@@ -4,13 +4,13 @@ version: 0.2
 env:
   shell: bash
   parameter-store:
-    DOCKER_USERNAME: uk.co.lumel.credentials.docker_username
-    DOCKER_PASSWORD: uk.co.lumel.credentials.docker_password 
+    DOCKER_ACCOUNT: uk.co.lumel.credentials.docker_username
+    DOCKER_ACCESS_TOKEN: uk.co.lumel.credentials.docker_pat
 
 phases:
   pre_build:
     commands:
-      - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      - docker login 
       - echo Branch is $DOCKER_TAG
 
   build:
