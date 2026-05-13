@@ -10,7 +10,7 @@ env:
 phases:
   pre_build:
     commands:
-	  - echo Creds  $DOCKER_ACCOUNT $DOCKER_ACCESS_TOKEN
+      - echo Creds  $DOCKER_ACCOUNT $DOCKER_ACCESS_TOKEN
       - docker login 
       - echo Branch is $DOCKER_TAG
 
