@@ -5,17 +5,18 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # Install core dependencies
 RUN apt-get -y update && \
-    apt-get -y install curl ca-certificates apt-transport-https && \
+    apt-get -y install curl ca-certificates apt-transport-https gpg && \
     rm -rf /var/lib/apt/lists/*	/usr/lib/unifi/data/*
 
 # Install apt signing keys
 RUN curl -o /etc/apt/trusted.gpg.d/unifi-repo.gpg https://dl.ui.com/unifi/unifi-repo.gpg && \
-    curl -o /etc/apt/trusted.gpg.d/monogdb-4.2.gpg https://pgp.mongodb.com/server-4.2.pub
-
+    curl -fsSL https://pgp.mongodb.com/server-8.0.asc | gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg --dearmor
+#    curl -o /etc/apt/trusted.gpg.d/monogdb-4.2.gpg https://pgp.mongodb.com/server-4.2.pub
 # Install additional sources
 RUN curl http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb -o libssl.deb && apt install ./libssl.deb && rm ./libssl.deb
-RUN echo 'deb [ arch=amd64 trusted=yes ] http://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse' >> /etc/apt/sources.list.d/099-monogdb.list
-# RUN echo "deb [trusted=yes] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/3.6 multiverse" >> /etc/apt/sources.list.d/mongodb-org-3.6.list
+# RUN echo 'deb [ arch=amd64 trusted=yes ] http://repo.mongodb.org/apt/ubuntu noble/mongodb-org/4.2 multiverse' >> /etc/apt/sources.list.d/099-monogdb.list
+RUN echo "deb [ arch=amd64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0 multiverse" > /etc/apt/sources.list.d/mongodb-org-8.0.list
+# RUN echo "deb [trusted=yes] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/3.6 multiverse" >> /etc/apt/sources.list.d/mongodb-org-3.6.list
 RUN echo 'deb https://www.ui.com/downloads/unifi/debian stable ubiquiti' >>  /etc/apt/sources.list.d/100-ubnt-unifi.list
 
 # Update OS and install UniFi:
@@ -23,6 +24,7 @@ RUN echo 'deb https://www.ui.com/downloads/unifi/debian stable ubiquiti' >>  /et
 RUN \
     apt-get -y update -q && \
     apt-get -y full-upgrade 
+RUN apt-get -y update
 RUN apt-get -y install unifi  && \
     apt-get -y autoremove && \
     apt-get -y autoclean && \
